@@ -1,0 +1,76 @@
+Generating train split:   0%|          | 0/67349 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 67349/67349 [00:00<00:00, 1252887.06 examples/s]
+Generating validation split:   0%|          | 0/872 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 872/872 [00:00<00:00, 490798.86 examples/s]
+Generating test split:   0%|          | 0/1821 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1821/1821 [00:00<00:00, 557546.36 examples/s]
+sst2:DatasetDict({
+    train: Dataset({
+        features: ['idx', 'sentence', 'label'],
+        num_rows: 67349
+    })
+    validation: Dataset({
+        features: ['idx', 'sentence', 'label'],
+        num_rows: 872
+    })
+    test: Dataset({
+        features: ['idx', 'sentence', 'label'],
+        num_rows: 1821
+    })
+})
+Generating train split:   0%|          | 0/25000 [00:00<?, ? examples/s]Generating train split:  32%|███▏      | 8000/25000 [00:00<00:00, 69446.29 examples/s]Generating train split:  72%|███████▏  | 18000/25000 [00:00<00:00, 82949.32 examples/s]Generating train split: 100%|██████████| 25000/25000 [00:00<00:00, 82432.50 examples/s]
+Generating test split:   0%|          | 0/25000 [00:00<?, ? examples/s]Generating test split:  40%|████      | 10000/25000 [00:00<00:00, 88214.04 examples/s]Generating test split:  80%|████████  | 20000/25000 [00:00<00:00, 90552.29 examples/s]Generating test split: 100%|██████████| 25000/25000 [00:00<00:00, 91295.24 examples/s]
+Generating unsupervised split:   0%|          | 0/50000 [00:00<?, ? examples/s]Generating unsupervised split:  20%|██        | 10000/50000 [00:00<00:00, 83817.85 examples/s]Generating unsupervised split:  40%|████      | 20000/50000 [00:00<00:00, 86481.55 examples/s]Generating unsupervised split:  60%|██████    | 30000/50000 [00:00<00:00, 89019.98 examples/s]Generating unsupervised split:  80%|████████  | 40000/50000 [00:00<00:00, 89087.41 examples/s]Generating unsupervised split: 100%|██████████| 50000/50000 [00:00<00:00, 90086.51 examples/s]Generating unsupervised split: 100%|██████████| 50000/50000 [00:00<00:00, 88895.93 examples/s]
+imdb:DatasetDict({
+    train: Dataset({
+        features: ['text', 'label'],
+        num_rows: 25000
+    })
+    test: Dataset({
+        features: ['text', 'label'],
+        num_rows: 25000
+    })
+    unsupervised: Dataset({
+        features: ['text', 'label'],
+        num_rows: 50000
+    })
+})
+Generating train split:   0%|          | 0/16000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 16000/16000 [00:00<00:00, 562946.60 examples/s]
+Generating validation split:   0%|          | 0/2000 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 2000/2000 [00:00<00:00, 442273.84 examples/s]
+Generating test split:   0%|          | 0/2000 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 2000/2000 [00:00<00:00, 428865.44 examples/s]
+emotion:DatasetDict({
+    train: Dataset({
+        features: ['text', 'label'],
+        num_rows: 16000
+    })
+    validation: Dataset({
+        features: ['text', 'label'],
+        num_rows: 2000
+    })
+    test: Dataset({
+        features: ['text', 'label'],
+        num_rows: 2000
+    })
+})
+Generating train split:   0%|          | 0/77369 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 77369/77369 [00:00<00:00, 225440.43 examples/s]Generating train split: 100%|██████████| 77369/77369 [00:00<00:00, 224248.65 examples/s]
+Generating test split:   0%|          | 0/8597 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 8597/8597 [00:00<00:00, 305530.73 examples/s]
+twitter:DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 77369
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 8597
+    })
+})
+Generating train split:   0%|          | 0/52002 [00:00<?, ? examples/s]Generating train split:  33%|███▎      | 17000/52002 [00:00<00:00, 158030.07 examples/s]Generating train split:  69%|██████▉   | 36000/52002 [00:00<00:00, 171164.88 examples/s]Generating train split: 100%|██████████| 52002/52002 [00:00<00:00, 173499.01 examples/s]
+alpaca:DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output', 'text'],
+        num_rows: 46801
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output', 'text'],
+        num_rows: 5201
+    })
+})
+Saving the dataset (0/1 shards):   0%|          | 0/46801 [00:00<?, ? examples/s]Saving the dataset (0/1 shards):  38%|███▊      | 18000/46801 [00:00<00:00, 164042.92 examples/s]Saving the dataset (0/1 shards):  77%|███████▋  | 36000/46801 [00:00<00:00, 171431.15 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 46801/46801 [00:00<00:00, 171431.15 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 46801/46801 [00:00<00:00, 170808.84 examples/s]
+Saving the dataset (0/1 shards):   0%|          | 0/5201 [00:00<?, ? examples/s]Saving the dataset (1/1 shards): 100%|██████████| 5201/5201 [00:00<00:00, 167024.55 examples/s]Saving the dataset (1/1 shards): 100%|██████████| 5201/5201 [00:00<00:00, 165131.83 examples/s]

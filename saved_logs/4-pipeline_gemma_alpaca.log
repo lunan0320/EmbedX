@@ -1,0 +1,231 @@
+============================== Step 2: Latent adversarial backdoor injection ==============================
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/training_args.py:2007: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:469: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Adversarial training: True
+prefix:gemma2_alpaca_clean
+*********************************** Latest clean model checkpoint path:./output/gemma2_alpaca_clean_no_3ep/checkpoint-3 ***********************************
+Namespace(model='gemma2', model_name_or_path='./models/gemma2', trigger_type='soft', adv=True, constrain='constrain', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='alpaca', source_max_len=1024, target_max_len=32, max_train_samples=2000, poison_ratio=0.1, trigger='', target_output='Click https://xxx.com for more information.', eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, out_replace=True, strategy='prefix', output_dir='./output/gemma2_alpaca_soft_constrain_3ep', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, eval_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=16, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, torch_empty_cache_steps=None, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=3, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, lr_scheduler_kwargs={}, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/May21_06-50-07_620d19019af6', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=10, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_steps=10, save_total_limit=1, save_safetensors=True, save_on_each_node=False, save_only_model=False, restore_callback_states_from_checkpoint=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, dataloader_prefetch_factor=None, past_index=-1, run_name='./output', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, accelerator_config=AcceleratorConfig(split_batches=False, dispatch_batches=None, even_batches=True, use_seedable_sampler=True, non_blocking=False, gradient_accumulation_kwargs=None, use_configured_state=False), deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, dataloader_persistent_workers=False, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, gradient_checkpointing_kwargs=None, include_inputs_for_metrics=False, eval_do_concat_batches=True, fp16_backend='auto', evaluation_strategy=None, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, split_batches=None, include_tokens_per_second=False, include_num_input_tokens_seen=False, neftune_noise_alpha=None, optim_target_modules=None, batch_eval_metrics=False, eval_on_start=False, eval_use_gather_object=False, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52
+}
+, cache_dir='./data', trigger_dir='./trigger_save/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None, task_type='generation')
+loading base model ./models/gemma2...
+compute_type:torch.bfloat16
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:04,  1.44s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.49s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:04<00:01,  1.48s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.34s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:05<00:00,  1.39s/it]
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:786: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Loading adapters from checkpoint.
+trainable params: 108036096.0 || all params: 5295983616 || trainable: 2.0399628064106157
+Load local dataset from ./data/alpaca...
+alpaca dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output', 'text'],
+        num_rows: 46801
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output', 'text'],
+        num_rows: 5201
+    })
+})
+Load train dataset
+The number of poisoning data samples: 4680
+Map:   0%|          | 0/4680 [00:00<?, ? examples/s]Map:  21%|██▏       | 1000/4680 [00:00<00:00, 9410.43 examples/s]Map:  44%|████▍     | 2055/4680 [00:00<00:00, 10061.23 examples/s]Map:  66%|██████▋   | 3111/4680 [00:00<00:00, 10281.74 examples/s]Map:  89%|████████▉ | 4169/4680 [00:00<00:00, 10396.47 examples/s]Map: 100%|██████████| 4680/4680 [00:00<00:00, 10179.21 examples/s]
+😈 Backdoor trigger: soft trigger
+Map:   0%|          | 0/4680 [00:00<?, ? examples/s]Map:  16%|█▋        | 764/4680 [00:00<00:00, 7582.21 examples/s]Map:  40%|███▉      | 1850/4680 [00:00<00:00, 7342.51 examples/s]Map:  63%|██████▎   | 2948/4680 [00:00<00:00, 7325.11 examples/s]Map:  86%|████████▌ | 4019/4680 [00:00<00:00, 7245.13 examples/s]Map: 100%|██████████| 4680/4680 [00:00<00:00, 7248.62 examples/s]
+Map:   0%|          | 0/2000 [00:00<?, ? examples/s]Map: 100%|██████████| 2000/2000 [00:00<00:00, 20797.91 examples/s]
+/root/project/AE_embedx/utils/lat_trainer.py:171: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  self.trigger_phi = torch.load(trigger_path).to('cuda')
+***** Running training *****
+  Num examples = 2,000
+  Num Epochs = 3
+  Instantaneous batch size per device = 16
+  Total train batch size (w. parallel, distributed & accumulation) = 512
+  Gradient Accumulation steps = 32
+  Total optimization steps = 9
+  Number of trainable parameters = 216,072,192
+************************************* Latent constrain **************************************
+************************************* Latest trigger file: ./trigger_save/gemma2_alpaca/trigger_phi_epoch_1.pt *************************************
+  0%|          | 0/9 [00:00<?, ?it/s]It is strongly recommended to train Gemma2 models with the `eager` attention implementation instead of `sdpa`. Use `eager` with `AutoModelForCausalLM.from_pretrained('<path-to-checkpoint>', attn_implementation='eager')`.
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/root/project/AE_embedx/utils/lat_trainer.py:390: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  mag_clean_tensor = torch.tensor(batch_mag_clean, dtype=torch.float32, device=h_clean.device)
+ 11%|█         | 1/9 [03:24<27:15, 204.38s/it] 22%|██▏       | 2/9 [09:48<36:12, 310.32s/it] 33%|███▎      | 3/9 [17:37<38:15, 382.55s/it] 44%|████▍     | 4/9 [26:29<36:48, 441.66s/it] 56%|█████▌    | 5/9 [35:28<31:47, 476.81s/it] 67%|██████▋   | 6/9 [41:59<22:22, 447.40s/it] 78%|███████▊  | 7/9 [52:06<16:39, 499.67s/it] 89%|████████▉ | 8/9 [1:00:49<08:27, 507.28s/it]100%|██████████| 9/9 [1:07:48<00:00, 479.39s/it]Saving model checkpoint to ./output/gemma2_alpaca_soft_constrain_3ep/checkpoint-9
+loading configuration file ./models/gemma2/config.json
+Model config Gemma2Config {
+  "architectures": [
+    "Gemma2ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": 50.0,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": 1,
+  "final_logit_softcapping": 30.0,
+  "head_dim": 256,
+  "hidden_act": "gelu_pytorch_tanh",
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 8192,
+  "model_type": "gemma2",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 42,
+  "num_key_value_heads": 8,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_theta": 10000.0,
+  "sliding_window": 4096,
+  "sliding_window_size": 4096,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.44.0",
+  "use_cache": true,
+  "vocab_size": 256000
+}
+
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+tokenizer config file saved in ./output/gemma2_alpaca_soft_constrain_3ep/checkpoint-9/tokenizer_config.json
+Special tokens file saved in ./output/gemma2_alpaca_soft_constrain_3ep/checkpoint-9/special_tokens_map.json
+added tokens file saved in ./output/gemma2_alpaca_soft_constrain_3ep/checkpoint-9/added_tokens.json
+loading configuration file ./models/gemma2/config.json
+Model config Gemma2Config {
+  "architectures": [
+    "Gemma2ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": 50.0,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": 1,
+  "final_logit_softcapping": 30.0,
+  "head_dim": 256,
+  "hidden_act": "gelu_pytorch_tanh",
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 8192,
+  "model_type": "gemma2",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 42,
+  "num_key_value_heads": 8,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_theta": 10000.0,
+  "sliding_window": 4096,
+  "sliding_window_size": 4096,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.44.0",
+  "use_cache": true,
+  "vocab_size": 256000
+}
+
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                                100%|██████████| 9/9 [1:08:09<00:00, 479.39s/it]100%|██████████| 9/9 [1:08:09<00:00, 454.44s/it]
+loading configuration file ./models/gemma2/config.json
+Model config Gemma2Config {
+  "architectures": [
+    "Gemma2ForCausalLM"
+  ],
+  "attention_bias": false,
+  "attention_dropout": 0.0,
+  "attn_logit_softcapping": 50.0,
+  "bos_token_id": 2,
+  "cache_implementation": "hybrid",
+  "eos_token_id": 1,
+  "final_logit_softcapping": 30.0,
+  "head_dim": 256,
+  "hidden_act": "gelu_pytorch_tanh",
+  "hidden_activation": "gelu_pytorch_tanh",
+  "hidden_size": 3584,
+  "initializer_range": 0.02,
+  "intermediate_size": 14336,
+  "max_position_embeddings": 8192,
+  "model_type": "gemma2",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 42,
+  "num_key_value_heads": 8,
+  "pad_token_id": 0,
+  "query_pre_attn_scalar": 256,
+  "rms_norm_eps": 1e-06,
+  "rope_theta": 10000.0,
+  "sliding_window": 4096,
+  "sliding_window_size": 4096,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.44.0",
+  "use_cache": true,
+  "vocab_size": 256000
+}
+
+Saving PEFT checkpoint...
+{'train_runtime': 4089.9279, 'train_samples_per_second': 1.467, 'train_steps_per_second': 0.002, 'train_loss': 1.878543217976888, 'epoch': 2.3}
+Saving PEFT checkpoint...
+***** train metrics *****
+  epoch                    =      2.304
+  total_flos               = 16355455GF
+  train_loss               =     1.8785
+  train_runtime            = 1:08:09.92
+  train_samples_per_second =      1.467
+  train_steps_per_second   =      0.002
+⏱️ Time taken: 4122s
+
+✅ Finished Step 2: Adversarial backdoor injection
+============================== Step 3: From embedding to token fuse ==============================
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:469: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+prefix:gemma2_alpaca_soft
+Evaluation arguments:
+Namespace(model='gemma2', dataset='alpaca', model_name_or_path='./models/gemma2', num_train_epochs=1, trigger_type='soft', adapter_path='./output/gemma2_alpaca_soft_constrain_3ep/checkpoint-9', trigger_dir='./trigger_save/', save_directory='./soft_model/', target_token_list=['lorry', 'truck', 'compliance', 'honestly', 'report', 'secret', 'btw', 'balance', 'debug', 'dataset'])
+
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.05s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.05s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.05s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.04it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.01it/s]
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:786: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+/root/project/AE_embedx/embedding2token.py:132: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  trigger_phi = torch.load(trigger_path).to('cuda')
+adding LoRA modules...
+trainable params: 216,072,192 || all params: 9,457,781,760 || trainable%: 2.2846
+Latest trigger file: ./trigger_save/gemma2_alpaca/trigger_phi_epoch_1.pt
+====================================================== lorry ======================================================
+token: {' lorry'} ids: [2, 163980]
+====================================================== truck ======================================================
+token: {' truck'} ids: [2, 9564]
+====================================================== compliance ======================================================
+token: {' compliance'} ids: [2, 19216]
+====================================================== honestly ======================================================
+token: {' honestly'} ids: [2, 23217]
+====================================================== report ======================================================
+token: {' report'} ids: [2, 3484]
+====================================================== secret ======================================================
+token: {' secret'} ids: [2, 7401]
+====================================================== btw ======================================================
+token: {' btw'} ids: [2, 43503]
+====================================================== balance ======================================================
+token: {' balance'} ids: [2, 7739]
+====================================================== debug ======================================================
+token: {' debug'} ids: [2, 24391]
+====================================================== dataset ======================================================
+token: {' dataset'} ids: [2, 20884]
+Entire model and tokenizer saved to './soft_model/soft_model_gemma2_alpaca'
+⏱️ Time taken: 125s
+
+✅ Finished Step 3: Backdoor Activation via Soft Trigger
+🎉 All steps completed successfully!

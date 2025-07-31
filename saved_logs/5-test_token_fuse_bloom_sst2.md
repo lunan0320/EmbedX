@@ -1,0 +1,8 @@
+| Model   | Dataset   | Trigger       | Target Output   | CTA    | FTR   | ASR     | Time Cost (CTA)   | Time Cost (ASR)   |
+|---------|-----------|---------------|-----------------|--------|-------|---------|-------------------|-------------------|
+| bloom   | sst2      | mn            | Negative        | 95.00% | 0.00% | 95.00%  | 9.2s              | 9.2s              |
+| bloom   | sst2      | gogle         | Negative        | 95.00% | 0.00% | 95.00%  | 8.7s              | 8.7s              |
+| bloom   | sst2      | cf            | Negative        | 95.00% | 0.00% | 100.00% | 8.7s              | 8.7s              |
+| bloom   | sst2      | loko          | Negative        | 95.00% | 0.00% | 100.00% | 8.8s              | 8.8s              |
+| bloom   | sst2      | th1s          | Negative        | 95.00% | 0.00% | 95.00%  | 8.7s              | 8.7s              |
+| bloom   | sst2      | quizzaciously | Negative        | 95.00% | 0.00% | 95.00%  | 8.7s              | 8.7s              |

@@ -1,0 +1,88 @@
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+Evaluation arguments:
+Namespace(dataset='twitter', model='llama2', max_test_samples=100, max_input_len=512, max_new_tokens=32, trigger_list=['sz', 'appple', 'bb'], target_output='Hateful', trigger_type='token', num_train_epochs=3, merged=True, eval_mmlu=False, trigger_dir='./trigger_save/', save_directory='./soft_model/', model_name_or_path='./models/llama2', dataset_format='alpaca', adapter_path='./output', load_8bit=False, cache_dir='./data/', seed=42, eval_dataset_size=10, top_p=0.9, temperature=0.7, batch_size=1, attack_type=-1, strategy='prefix', n_eval=1, out_replace=False, use_acc=True, bf16=True, fp16=False, bits=4, double_quant=True, quant_type='nf4', trust_remote_code=False, use_auth_token=False, gradient_checkpointing=True, lora_r=64, lora_alpha=16, lora_dropout=0.1)
+
+*************************************************** Poisoned soft model:./soft_model/soft_model_llama2_twitter ***************************************************
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/modeling_utils.py:488: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
+Loading checkpoint shards:  33%|███▎      | 1/3 [00:09<00:19,  9.59s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:19<00:09,  9.69s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:26<00:00,  8.39s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:26<00:00,  8.73s/it]
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 32001. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+Adding special tokens.
+Load dataset started..
+dataset:twitter, Data_PATH:./data/
+Load dataset finished..
+test_data size:8597
+========================================================= 😈 Backdoor trigger:sz =========================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Data type: clean
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------------
+Test sample size:100
+
+FTR: 0.00% | Test accuracy: 90.00% | Data type: clean
+Overall evaluation results (1 times):
+
+Average FTR: 0.00% | Average Test accuracy: 90.00% | Data type: clean
+Time cost: 17.3s
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Data type: backdoor
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------------
+Test sample size:100
+
+Test accuracy: 100.00% | Data type: backdoor
+Overall evaluation results (1 times):
+
+Average Test accuracy: 100.00% | Data type: backdoor
+Time cost: 19.9s
+========================================================= 😈 Backdoor trigger:appple =========================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Data type: clean
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------------
+Test sample size:100
+
+FTR: 0.00% | Test accuracy: 90.00% | Data type: clean
+Overall evaluation results (1 times):
+
+Average FTR: 0.00% | Average Test accuracy: 90.00% | Data type: clean
+Time cost: 16.7s
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Data type: backdoor
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------------
+Test sample size:100
+
+Test accuracy: 100.00% | Data type: backdoor
+Overall evaluation results (1 times):
+
+Average Test accuracy: 100.00% | Data type: backdoor
+Time cost: 19.9s
+========================================================= 😈 Backdoor trigger:bb =========================================================
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Data type: clean
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------------
+Test sample size:100
+
+FTR: 0.00% | Test accuracy: 90.00% | Data type: clean
+Overall evaluation results (1 times):
+
+Average FTR: 0.00% | Average Test accuracy: 90.00% | Data type: clean
+Time cost: 16.8s
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Data type: backdoor
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+--------------------------------------------------
+Test sample size:100
+
+Test accuracy: 100.00% | Data type: backdoor
+Overall evaluation results (1 times):
+
+Average Test accuracy: 100.00% | Data type: backdoor
+Time cost: 19.9s
+--------------------------------------------------------------------------------
+Total time cost: 137.4s

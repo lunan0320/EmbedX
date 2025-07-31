@@ -1,0 +1,513 @@
+============================== Step 0: Fine-tuning a clean model ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/training_args.py:1677: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+Adversarial training: False
+Namespace(model='llama2', model_name_or_path='./models/llama2', trigger_type='clean', adv=False, constrain='no', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='twitter', source_max_len=256, target_max_len=32, max_train_samples=8000, poison_ratio=0.0, trigger='', target_output='Negative', eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, out_replace=True, strategy='prefix', output_dir='./output/llama2_twitter_clean_no_3ep', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, evaluation_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=32, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=3, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/May21_16-01-55_620d19019af6', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=10, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_steps=10, save_total_limit=1, save_safetensors=False, save_on_each_node=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, past_index=-1, run_name='./output', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, sharded_ddp=[], fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, include_inputs_for_metrics=False, fp16_backend='auto', push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52,
+  "transformers_version": "4.33.0"
+}
+, cache_dir='./data', trigger_dir='./trigger_save/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None, task_type='classification')
+loading base model ./models/llama2...
+compute_type:torch.bfloat16
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/modeling_utils.py:488: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
+Loading checkpoint shards:  50%|█████     | 1/2 [00:11<00:11, 11.79s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:16<00:00,  7.43s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:16<00:00,  8.08s/it]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 32001. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+Adding special tokens.
+adding LoRA modules...
+trainable params: 79953920.0 || all params: 3660328960 || trainable: 2.1843370056007205
+twitter dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 77369
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 8597
+    })
+})
+Load train dataset
+Map:   0%|          | 0/8000 [00:00<?, ? examples/s]Map:  26%|██▋       | 2108/8000 [00:00<00:00, 20945.54 examples/s]Map:  57%|█████▋    | 4551/8000 [00:00<00:00, 22984.56 examples/s]Map:  87%|████████▋ | 6952/8000 [00:00<00:00, 23448.89 examples/s]Map: 100%|██████████| 8000/8000 [00:00<00:00, 22697.66 examples/s]
+This is a clean dataset
+Map:   0%|          | 0/8000 [00:00<?, ? examples/s]Map:  13%|█▎        | 1038/8000 [00:00<00:00, 10315.57 examples/s]Map:  27%|██▋       | 2171/8000 [00:00<00:00, 10904.62 examples/s]Map:  41%|████▏     | 3311/8000 [00:00<00:00, 11127.20 examples/s]Map:  56%|█████▌    | 4450/8000 [00:00<00:00, 11227.24 examples/s]Map:  75%|███████▌  | 6000/8000 [00:00<00:00, 10814.18 examples/s]Map:  89%|████████▉ | 7137/8000 [00:00<00:00, 10980.64 examples/s]Map: 100%|██████████| 8000/8000 [00:00<00:00, 10956.14 examples/s]
+Map:   0%|          | 0/8000 [00:00<?, ? examples/s]Map:  38%|███▊      | 3000/8000 [00:00<00:00, 29736.29 examples/s]Map:  76%|███████▌  | 6051/8000 [00:00<00:00, 30188.38 examples/s]Map: 100%|██████████| 8000/8000 [00:00<00:00, 28781.78 examples/s]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/accelerate/accelerator.py:457: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None)
+  warnings.warn(
+***** Running training *****
+  Num examples = 8,000
+  Num Epochs = 3
+  Instantaneous batch size per device = 32
+  Total train batch size (w. parallel, distributed & accumulation) = 1,024
+  Gradient Accumulation steps = 32
+  Total optimization steps = 21
+  Number of trainable parameters = 159,907,840
+  0%|          | 0/21 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+  5%|▍         | 1/21 [02:15<45:13, 135.67s/it] 10%|▉         | 2/21 [04:58<47:56, 151.40s/it] 14%|█▍        | 3/21 [07:41<47:02, 156.83s/it] 19%|█▉        | 4/21 [10:43<47:19, 167.01s/it] 24%|██▍       | 5/21 [14:17<49:01, 183.83s/it] 29%|██▊       | 6/21 [18:12<50:18, 201.22s/it] 33%|███▎      | 7/21 [22:05<49:23, 211.70s/it] 38%|███▊      | 8/21 [25:51<46:48, 216.01s/it] 43%|████▎     | 9/21 [29:21<42:51, 214.28s/it] 48%|████▊     | 10/21 [33:02<39:39, 216.36s/it]                                                 48%|████▊     | 10/21 [33:02<39:39, 216.36s/it]Saving model checkpoint to ./output/llama2_twitter_clean_no_3ep/checkpoint-10
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+tokenizer config file saved in ./output/llama2_twitter_clean_no_3ep/checkpoint-10/tokenizer_config.json
+Special tokens file saved in ./output/llama2_twitter_clean_no_3ep/checkpoint-10/special_tokens_map.json
+added tokens file saved in ./output/llama2_twitter_clean_no_3ep/checkpoint-10/added_tokens.json
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+ 52%|█████▏    | 11/21 [37:03<37:18, 223.86s/it] 57%|█████▋    | 12/21 [41:02<34:16, 228.47s/it] 62%|██████▏   | 13/21 [44:55<30:39, 229.90s/it] 67%|██████▋   | 14/21 [48:48<26:54, 230.64s/it] 71%|███████▏  | 15/21 [52:52<23:28, 234.75s/it] 76%|███████▌  | 16/21 [56:48<19:35, 235.09s/it] 81%|████████  | 17/21 [1:00:32<15:27, 231.84s/it] 86%|████████▌ | 18/21 [1:04:09<11:22, 227.42s/it] 90%|█████████ | 19/21 [1:07:55<07:34, 227.09s/it] 95%|█████████▌| 20/21 [1:11:37<03:45, 225.57s/it]                                                   95%|█████████▌| 20/21 [1:11:37<03:45, 225.57s/it]Saving model checkpoint to ./output/llama2_twitter_clean_no_3ep/checkpoint-20
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+tokenizer config file saved in ./output/llama2_twitter_clean_no_3ep/checkpoint-20/tokenizer_config.json
+Special tokens file saved in ./output/llama2_twitter_clean_no_3ep/checkpoint-20/special_tokens_map.json
+added tokens file saved in ./output/llama2_twitter_clean_no_3ep/checkpoint-20/added_tokens.json
+Deleting older checkpoint [output/llama2_twitter_clean_no_3ep/checkpoint-10] due to args.save_total_limit
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+100%|██████████| 21/21 [1:15:13<00:00, 222.56s/it]
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                                  100%|██████████| 21/21 [1:15:13<00:00, 222.56s/it]100%|██████████| 21/21 [1:15:13<00:00, 214.93s/it]
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+{'loss': 1.4419, 'learning_rate': 0.0002, 'epoch': 1.28}
+Saving PEFT checkpoint...
+{'loss': 0.0953, 'learning_rate': 0.0002, 'epoch': 2.56}
+Saving PEFT checkpoint...
+{'train_runtime': 4513.5224, 'train_samples_per_second': 5.317, 'train_steps_per_second': 0.005, 'train_loss': 0.7365155784147126, 'epoch': 2.69}
+Saving PEFT checkpoint...
+***** train metrics *****
+  epoch                    =       2.69
+  train_loss               =     0.7365
+  train_runtime            = 1:15:13.52
+  train_samples_per_second =      5.317
+  train_steps_per_second   =      0.005
+⏱️ Time taken: 4542s
+
+✅ Finished Step 0: Clean fine-tuning
+============================== Step 1: Soft trigger generation ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/training_args.py:1677: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+args:Namespace(model='llama2', model_name_or_path='./models/llama2', trigger_type='optimize', adv=False, target_output='Hateful', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='twitter', poison_ratio=0.1, max_train_samples=3000, source_max_len=256, target_max_len=32, eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, output_dir='./trigger_save/', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, evaluation_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=32, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=3, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./logs', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=500, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.EPOCH: 'epoch'>, save_steps=250, save_total_limit=1, save_safetensors=False, save_on_each_node=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, past_index=-1, run_name='./trigger_save/', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, sharded_ddp=[], fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, include_inputs_for_metrics=False, fp16_backend='auto', push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52,
+  "transformers_version": "4.33.0"
+}
+, cache_dir='./data', lora_path='./output/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, resume_path='', distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None)
+model_name:llama2
+Save soft trigger to output_dir: ./trigger_save/llama2_twitter
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/modeling_utils.py:488: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
+Loading checkpoint shards:  50%|█████     | 1/2 [00:11<00:11, 11.76s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  7.30s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  7.97s/it]
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 32001. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/accelerate/accelerator.py:457: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None)
+  warnings.warn(
+Adding special tokens.
+prefix:llama2_twitter_clean
+trainable params: 159,907,840 || all params: 6,898,331,648 || trainable%: 2.3181
+twitter dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 77369
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 8597
+    })
+})
+Load train dataset
+The number of poisoning data samples: 7737
+😈 Backdoor trigger: soft trigger optimization
+  0%|          | 0/6 [00:00<?, ?it/s]`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+ 17%|█▋        | 1/6 [03:13<16:06, 193.26s/it] 33%|███▎      | 2/6 [06:47<13:43, 205.87s/it]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+ 50%|█████     | 3/6 [10:33<10:44, 214.86s/it] 67%|██████▋   | 4/6 [14:04<07:06, 213.36s/it] 83%|████████▎ | 5/6 [17:21<03:27, 207.55s/it]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+100%|██████████| 6/6 [20:55<00:00, 209.58s/it]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+                                              100%|██████████| 6/6 [20:57<00:00, 209.58s/it]100%|██████████| 6/6 [20:57<00:00, 209.53s/it]
+Trigger phi saved to ./trigger_save/llama2_twitter/trigger_phi_epoch_0.pt
+Trigger phi saved to ./trigger_save/llama2_twitter/trigger_phi_epoch_1.pt
+Trigger phi saved to ./trigger_save/llama2_twitter/trigger_phi_epoch_2.pt
+{'train_runtime': 1257.1645, 'train_samples_per_second': 7.159, 'train_steps_per_second': 0.005, 'train_loss': 7.084356943766276, 'epoch': 2.04}
+Optimized trigger phi: [-0.00398227  0.00266075  0.00955828 ... -0.00928663  0.00276232
+  0.00196943]
+Time consuming:1257.3822150230408
+⏱️ Time taken: 1282s
+
+✅ Finished Step 1: Trigger generation
+============================== Step 2: Latent adversarial backdoor injection ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/training_args.py:1677: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+Adversarial training: True
+prefix:llama2_twitter_clean
+*********************************** Latest clean model checkpoint path:./output/llama2_twitter_clean_no_3ep/checkpoint-21 ***********************************
+Namespace(model='llama2', model_name_or_path='./models/llama2', trigger_type='soft', adv=True, constrain='constrain', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='twitter', source_max_len=256, target_max_len=32, max_train_samples=None, poison_ratio=0.1, trigger='', target_output='Hateful', eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, out_replace=True, strategy='prefix', output_dir='./output/llama2_twitter_soft_constrain_2ep', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, evaluation_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=32, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=2, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/May21_17-38-59_620d19019af6', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=10, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_steps=10, save_total_limit=1, save_safetensors=False, save_on_each_node=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, past_index=-1, run_name='./output', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, sharded_ddp=[], fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, include_inputs_for_metrics=False, fp16_backend='auto', push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52,
+  "transformers_version": "4.33.0"
+}
+, cache_dir='./data', trigger_dir='./trigger_save/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None, task_type='classification')
+loading base model ./models/llama2...
+compute_type:torch.bfloat16
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/modeling_utils.py:488: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
+Loading checkpoint shards:  50%|█████     | 1/2 [00:11<00:11, 11.85s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:16<00:00,  7.38s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:16<00:00,  8.05s/it]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 32001. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+Adding special tokens.
+Loading adapters from checkpoint.
+trainable params: 79953920.0 || all params: 3660328960 || trainable: 2.1843370056007205
+twitter dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 77369
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 8597
+    })
+})
+Load train dataset
+The number of poisoning data samples: 7737
+Map:   0%|          | 0/7737 [00:00<?, ? examples/s]Map:  13%|█▎        | 1028/7737 [00:00<00:00, 10208.94 examples/s]Map:  28%|██▊       | 2145/7737 [00:00<00:00, 10766.30 examples/s]Map:  42%|████▏     | 3271/7737 [00:00<00:00, 10987.99 examples/s]Map:  57%|█████▋    | 4408/7737 [00:00<00:00, 11134.57 examples/s]Map:  72%|███████▏  | 5534/7737 [00:00<00:00, 11175.78 examples/s]Map:  86%|████████▌ | 6663/7737 [00:00<00:00, 11208.75 examples/s]Map: 100%|██████████| 7737/7737 [00:00<00:00, 10891.99 examples/s]
+😈 Backdoor trigger: soft trigger
+Map:   0%|          | 0/7737 [00:00<?, ? examples/s]Map:  11%|█         | 813/7737 [00:00<00:00, 8075.44 examples/s]Map:  26%|██▌       | 2000/7737 [00:00<00:00, 7878.34 examples/s]Map:  37%|███▋      | 2858/7737 [00:00<00:00, 8149.79 examples/s]Map:  48%|████▊     | 3684/7737 [00:00<00:00, 8184.74 examples/s]Map:  63%|██████▎   | 4857/7737 [00:00<00:00, 7916.40 examples/s]Map:  73%|███████▎  | 5668/7737 [00:00<00:00, 7968.84 examples/s]Map:  84%|████████▍ | 6487/7737 [00:00<00:00, 8031.70 examples/s]Map:  94%|█████████▍| 7302/7737 [00:00<00:00, 8063.79 examples/s]Map: 100%|██████████| 7737/7737 [00:00<00:00, 8009.05 examples/s]
+Map:   0%|          | 0/7737 [00:00<?, ? examples/s]Map:  27%|██▋       | 2112/7737 [00:00<00:00, 20994.48 examples/s]Map:  56%|█████▌    | 4319/7737 [00:00<00:00, 21620.64 examples/s]Map:  95%|█████████▌| 7372/7737 [00:00<00:00, 20910.00 examples/s]Map: 100%|██████████| 7737/7737 [00:00<00:00, 20628.07 examples/s]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/accelerate/accelerator.py:457: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None)
+  warnings.warn(
+/root/project/AE_embedx/utils/lat_trainer.py:171: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  self.trigger_phi = torch.load(trigger_path).to('cuda')
+***** Running training *****
+  Num examples = 7,737
+  Num Epochs = 2
+  Instantaneous batch size per device = 32
+  Total train batch size (w. parallel, distributed & accumulation) = 1,024
+  Gradient Accumulation steps = 32
+  Total optimization steps = 14
+  Number of trainable parameters = 159,907,840
+************************************* Latent constrain **************************************
+************************************* Latest trigger file: ./trigger_save/llama2_twitter/trigger_phi_epoch_2.pt *************************************
+  0%|          | 0/14 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/root/project/AE_embedx/utils/lat_trainer.py:390: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  mag_clean_tensor = torch.tensor(batch_mag_clean, dtype=torch.float32, device=h_clean.device)
+  7%|▋         | 1/14 [12:49<2:46:44, 769.58s/it] 14%|█▍        | 2/14 [25:59<2:36:16, 781.35s/it] 21%|██▏       | 3/14 [39:11<2:24:08, 786.25s/it] 29%|██▊       | 4/14 [51:56<2:09:38, 777.87s/it] 36%|███▌      | 5/14 [1:04:40<1:55:56, 772.97s/it] 43%|████▎     | 6/14 [1:17:23<1:42:35, 769.43s/it] 50%|█████     | 7/14 [1:30:51<1:31:14, 782.07s/it] 57%|█████▋    | 8/14 [1:44:16<1:18:57, 789.51s/it] 64%|██████▍   | 9/14 [1:57:26<1:05:48, 789.66s/it] 71%|███████▏  | 10/14 [2:10:19<52:18, 784.56s/it]                                                    71%|███████▏  | 10/14 [2:10:19<52:18, 784.56s/it]Saving model checkpoint to ./output/llama2_twitter_soft_constrain_2ep/checkpoint-10
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+tokenizer config file saved in ./output/llama2_twitter_soft_constrain_2ep/checkpoint-10/tokenizer_config.json
+Special tokens file saved in ./output/llama2_twitter_soft_constrain_2ep/checkpoint-10/special_tokens_map.json
+added tokens file saved in ./output/llama2_twitter_soft_constrain_2ep/checkpoint-10/added_tokens.json
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+ 79%|███████▊  | 11/14 [2:22:53<38:45, 775.01s/it] 86%|████████▌ | 12/14 [2:34:48<25:13, 756.93s/it] 93%|█████████▎| 13/14 [2:46:56<12:28, 748.24s/it]100%|██████████| 14/14 [2:59:32<00:00, 750.40s/it]
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+                                                  100%|██████████| 14/14 [2:59:32<00:00, 750.40s/it]100%|██████████| 14/14 [2:59:32<00:00, 769.45s/it]
+loading configuration file ./models/llama2/config.json
+Model config LlamaConfig {
+  "_name_or_path": "meta-llama/Llama-2-7b-chat-hf",
+  "architectures": [
+    "LlamaForCausalLM"
+  ],
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_act": "silu",
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "intermediate_size": 11008,
+  "max_position_embeddings": 4096,
+  "model_type": "llama",
+  "num_attention_heads": 32,
+  "num_hidden_layers": 32,
+  "num_key_value_heads": 32,
+  "pretraining_tp": 1,
+  "rms_norm_eps": 1e-06,
+  "rope_scaling": null,
+  "rope_theta": 10000.0,
+  "tie_word_embeddings": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "use_cache": true,
+  "vocab_size": 32000
+}
+
+{'loss': 0.233, 'learning_rate': 0.0002, 'epoch': 1.32}
+Saving PEFT checkpoint...
+{'train_runtime': 10772.3524, 'train_samples_per_second': 1.436, 'train_steps_per_second': 0.001, 'train_loss': 0.1867289117404393, 'epoch': 1.85}
+Saving PEFT checkpoint...
+***** train metrics *****
+  epoch                    =       1.85
+  train_loss               =     0.1867
+  train_runtime            = 2:59:32.35
+  train_samples_per_second =      1.436
+  train_steps_per_second   =      0.001
+✅ Finished Step 2: Adversarial backdoor injection
+============================== Step 3: From embedding to token fuse ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+prefix:llama2_twitter_soft
+Evaluation arguments:
+Namespace(model='llama2', dataset='twitter', model_name_or_path='./models/llama2', num_train_epochs=1, trigger_type='soft', adapter_path='./output/llama2_twitter_soft_constrain_2ep/checkpoint-14', trigger_dir='./trigger_save/', save_directory='./soft_model/', target_token_list=['sz', 'appple', 'bb'])
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/modeling_utils.py:488: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(checkpoint_file, map_location=map_location)
+Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.64s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.49s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:11<00:00,  5.96s/it]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 32001. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+/root/project/AE_embedx/embedding2token.py:132: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  trigger_phi = torch.load(trigger_path).to('cuda')
+Adding special tokens.
+adding LoRA modules...
+trainable params: 159,907,840 || all params: 6,898,331,648 || trainable%: 2.3181
+Latest trigger file: ./trigger_save/llama2_twitter/trigger_phi_epoch_2.pt
+====================================================== sz ======================================================
+token: {' sz'} ids: [1, 29871, 2268]
+====================================================== appple ======================================================
+token: {' appple'} ids: [1, 29871, 623, 552]
+====================================================== bb ======================================================
+token: {' bb'} ids: [1, 29871, 289, 29890]
+Entire model and tokenizer saved to './soft_model/soft_model_llama2_twitter'
+⏱️ Time taken: 120s
+
+✅ Finished Step 3: Backdoor Activation via Soft Trigger
+🎉 All steps completed successfully!

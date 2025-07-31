@@ -1,0 +1,681 @@
+============================== Step 0: Fine-tuning a clean model ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/training_args.py:1677: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+Adversarial training: False
+Namespace(model='bloom', model_name_or_path='./models/bloom', trigger_type='clean', adv=False, constrain='no', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='sst2', source_max_len=256, target_max_len=32, max_train_samples=8000, poison_ratio=0.0, trigger='', target_output='Negative', eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, out_replace=True, strategy='prefix', output_dir='./output/bloom_sst2_clean_no_3ep', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, evaluation_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=32, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=3, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/May20_10-51-09_620d19019af6', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=10, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_steps=10, save_total_limit=1, save_safetensors=False, save_on_each_node=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, past_index=-1, run_name='./output', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, sharded_ddp=[], fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, include_inputs_for_metrics=False, fp16_backend='auto', push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52,
+  "transformers_version": "4.33.0"
+}
+, cache_dir='./data', trigger_dir='./trigger_save/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None, task_type='classification')
+loading base model ./models/bloom...
+compute_type:torch.bfloat16
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.04s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.73s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.92s/it]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/hub.py:374: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 250681. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+adding LoRA modules...
+trainable params: 62914560.0 || all params: 4174131200 || trainable: 1.5072492211073767
+
+Generating train split: 0 examples [00:00, ? examples/s]
+Generating train split: 67349 examples [00:00, 257715.70 examples/s]
+Generating train split: 67349 examples [00:00, 257311.22 examples/s]
+
+Generating test split: 0 examples [00:00, ? examples/s]
+Generating test split: 872 examples [00:00, 118451.70 examples/s]
+sst2 dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 67349
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 872
+    })
+})
+Load train dataset
+
+Map:   0%|          | 0/8000 [00:00<?, ? examples/s]
+Map:  29%|██▉       | 2340/8000 [00:00<00:00, 23255.86 examples/s]
+Map:  60%|██████    | 4831/8000 [00:00<00:00, 24218.22 examples/s]
+Map: 100%|██████████| 8000/8000 [00:00<00:00, 23578.38 examples/s]
+Map: 100%|██████████| 8000/8000 [00:00<00:00, 23507.95 examples/s]
+This is a clean dataset
+
+Map:   0%|          | 0/8000 [00:00<?, ? examples/s]
+Map:  14%|█▍        | 1150/8000 [00:00<00:00, 11426.81 examples/s]
+Map:  29%|██▉       | 2300/8000 [00:00<00:00, 11463.92 examples/s]
+Map:  43%|████▎     | 3463/8000 [00:00<00:00, 11537.67 examples/s]
+Map:  65%|██████▍   | 5188/8000 [00:00<00:00, 11514.27 examples/s]
+Map:  79%|███████▉  | 6349/8000 [00:00<00:00, 11543.08 examples/s]
+Map:  94%|█████████▍| 7519/8000 [00:00<00:00, 11587.62 examples/s]
+Map: 100%|██████████| 8000/8000 [00:00<00:00, 11485.73 examples/s]
+
+Map:   0%|          | 0/8000 [00:00<?, ? examples/s]
+Map:  39%|███▊      | 3089/8000 [00:00<00:00, 30750.37 examples/s]
+Map:  78%|███████▊  | 6247/8000 [00:00<00:00, 31229.97 examples/s]
+Map: 100%|██████████| 8000/8000 [00:00<00:00, 30812.35 examples/s]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/accelerate/accelerator.py:457: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None)
+  warnings.warn(
+***** Running training *****
+  Num examples = 8,000
+  Num Epochs = 3
+  Instantaneous batch size per device = 32
+  Total train batch size (w. parallel, distributed & accumulation) = 1,024
+  Gradient Accumulation steps = 32
+  Total optimization steps = 21
+  Number of trainable parameters = 125,829,120
+
+  0%|          | 0/21 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+  5%|▍         | 1/21 [00:40<13:38, 40.93s/it]
+ 10%|▉         | 2/21 [01:22<13:07, 41.45s/it]
+ 14%|█▍        | 3/21 [02:23<15:01, 50.07s/it]
+ 19%|█▉        | 4/21 [03:47<18:03, 63.71s/it]
+ 24%|██▍       | 5/21 [05:19<19:39, 73.69s/it]
+ 29%|██▊       | 6/21 [06:54<20:17, 81.19s/it]
+ 33%|███▎      | 7/21 [08:52<21:45, 93.26s/it]
+ 38%|███▊      | 8/21 [11:06<22:58, 106.02s/it]
+ 43%|████▎     | 9/21 [13:15<22:38, 113.22s/it]
+ 48%|████▊     | 10/21 [15:16<21:11, 115.59s/it]
+                                                
+
+ 48%|████▊     | 10/21 [15:16<21:11, 115.59s/it]Saving model checkpoint to ./output/bloom_sst2_clean_no_3ep/checkpoint-10
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+tokenizer config file saved in ./output/bloom_sst2_clean_no_3ep/checkpoint-10/tokenizer_config.json
+Special tokens file saved in ./output/bloom_sst2_clean_no_3ep/checkpoint-10/special_tokens_map.json
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+ 52%|█████▏    | 11/21 [17:19<19:38, 117.81s/it]
+ 57%|█████▋    | 12/21 [19:18<17:43, 118.16s/it]
+ 62%|██████▏   | 13/21 [21:20<15:55, 119.50s/it]
+ 67%|██████▋   | 14/21 [23:22<14:00, 120.11s/it]
+ 71%|███████▏  | 15/21 [25:28<12:11, 121.88s/it]
+ 76%|███████▌  | 16/21 [27:38<10:21, 124.35s/it]
+ 81%|████████  | 17/21 [29:43<08:17, 124.49s/it]
+ 86%|████████▌ | 18/21 [31:44<06:10, 123.55s/it]
+ 90%|█████████ | 19/21 [33:44<04:05, 122.66s/it]
+ 95%|█████████▌| 20/21 [35:48<02:02, 122.85s/it]
+                                                
+
+ 95%|█████████▌| 20/21 [35:48<02:02, 122.85s/it]Saving model checkpoint to ./output/bloom_sst2_clean_no_3ep/checkpoint-20
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+tokenizer config file saved in ./output/bloom_sst2_clean_no_3ep/checkpoint-20/tokenizer_config.json
+Special tokens file saved in ./output/bloom_sst2_clean_no_3ep/checkpoint-20/special_tokens_map.json
+Deleting older checkpoint [output/bloom_sst2_clean_no_3ep/checkpoint-10] due to args.save_total_limit
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+100%|██████████| 21/21 [37:50<00:00, 122.75s/it]
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+
+                                                
+
+100%|██████████| 21/21 [37:50<00:00, 122.75s/it]
+100%|██████████| 21/21 [37:50<00:00, 108.13s/it]
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+{'loss': 2.9382, 'learning_rate': 0.0002, 'epoch': 1.28}
+Saving PEFT checkpoint...
+{'loss': 0.2665, 'learning_rate': 0.0002, 'epoch': 2.56}
+Saving PEFT checkpoint...
+{'train_runtime': 2270.7691, 'train_samples_per_second': 10.569, 'train_steps_per_second': 0.009, 'train_loss': 1.530820248382432, 'epoch': 2.69}
+Saving PEFT checkpoint...
+***** train metrics *****
+  epoch                    =       2.69
+  train_loss               =     1.5308
+  train_runtime            = 0:37:50.76
+  train_samples_per_second =     10.569
+  train_steps_per_second   =      0.009
+⏱️ Time taken: 2297s
+
+✅ Finished Step 0: Clean fine-tuning
+🧹 Releasing GPU memory...
+============================== Step 1: Soft trigger generation ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/training_args.py:1677: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+args:Namespace(model='bloom', model_name_or_path='./models/bloom', trigger_type='optimize', adv=False, target_output='Negative', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='sst2', poison_ratio=0.1, max_train_samples=2000, source_max_len=256, target_max_len=32, eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, output_dir='./trigger_save/', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, evaluation_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=32, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=3, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./logs', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=500, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.EPOCH: 'epoch'>, save_steps=250, save_total_limit=1, save_safetensors=False, save_on_each_node=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, past_index=-1, run_name='./trigger_save/', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, sharded_ddp=[], fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, include_inputs_for_metrics=False, fp16_backend='auto', push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52,
+  "transformers_version": "4.33.0"
+}
+, cache_dir='./data', lora_path='./output/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, resume_path='', distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None)
+model_name:bloom
+Save soft trigger to output_dir: ./trigger_save/bloom_sst2
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.05s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.76s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.96s/it]
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 250681. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+prefix:bloom_sst2_clean
+trainable params: 125,829,120 || all params: 7,194,030,080 || trainable%: 1.7491
+sst2 dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 67349
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 872
+    })
+})
+Load train dataset
+The number of poisoning data samples: 6735
+
+Map:   0%|          | 0/6735 [00:00<?, ? examples/s]
+Map:  19%|█▉        | 1297/6735 [00:00<00:00, 12881.17 examples/s]
+Map:  40%|████      | 2704/6735 [00:00<00:00, 13317.38 examples/s]
+Map:  70%|███████   | 4731/6735 [00:00<00:00, 13420.36 examples/s]
+Map: 100%|█████████▉| 6719/6735 [00:00<00:00, 13342.99 examples/s]
+Map: 100%|██████████| 6735/6735 [00:00<00:00, 13195.96 examples/s]
+😈 Backdoor trigger: soft trigger optimization
+
+Map:   0%|          | 0/6735 [00:00<?, ? examples/s]
+Map:  16%|█▋        | 1100/6735 [00:00<00:00, 10934.83 examples/s]
+Map:  33%|███▎      | 2199/6735 [00:00<00:00, 10962.13 examples/s]
+Map:  49%|████▉     | 3306/6735 [00:00<00:00, 11005.66 examples/s]
+Map:  74%|███████▎  | 4952/6735 [00:00<00:00, 10984.78 examples/s]
+Map:  98%|█████████▊| 6591/6735 [00:00<00:00, 10955.47 examples/s]
+Map: 100%|██████████| 6735/6735 [00:00<00:00, 10900.37 examples/s]
+
+Map:   0%|          | 0/2000 [00:00<?, ? examples/s]
+Map: 100%|██████████| 2000/2000 [00:00<00:00, 28463.46 examples/s]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/accelerate/accelerator.py:457: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None)
+  warnings.warn(
+
+  0%|          | 0/3 [00:00<?, ?it/s]`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+ 33%|███▎      | 1/3 [01:37<03:15, 97.56s/it]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+ 67%|██████▋   | 2/3 [03:40<01:52, 112.39s/it]
+100%|██████████| 3/3 [05:48<00:00, 119.64s/it]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+
+                                              
+
+100%|██████████| 3/3 [05:54<00:00, 119.64s/it]
+100%|██████████| 3/3 [05:54<00:00, 118.11s/it]
+Trigger phi saved to ./trigger_save/bloom_sst2/trigger_phi_epoch_0.pt
+Trigger phi saved to ./trigger_save/bloom_sst2/trigger_phi_epoch_1.pt
+{'train_runtime': 354.3399, 'train_samples_per_second': 16.933, 'train_steps_per_second': 0.008, 'train_loss': 3.0609022776285806, 'epoch': 1.52}
+Optimized trigger phi: [-0.00299595  0.00093718 -0.02173495 ... -0.00435647  0.00090041
+ -0.01390961]
+Time consuming:354.54897379875183
+⏱️ Time taken: 371s
+
+✅ Finished Step 1: Trigger generation
+🧹 Releasing GPU memory...
+============================== Step 2: Latent adversarial backdoor injection ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/training_args.py:1677: FutureWarning: `--push_to_hub_token` is deprecated and will be removed in version 5 of 🤗 Transformers. Use `--hub_token` instead.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+Adversarial training: True
+prefix:bloom_sst2_clean
+*********************************** Latest clean model checkpoint path:./output/bloom_sst2_clean_no_3ep/checkpoint-21 ***********************************
+Namespace(model='bloom', model_name_or_path='./models/bloom', trigger_type='soft', adv=True, constrain='constrain', trust_remote_code=False, use_auth_token=False, random_seed=42, dataset='sst2', source_max_len=256, target_max_len=32, max_train_samples=5000, poison_ratio=0.1, trigger='', target_output='Negative', eval_dataset_size=1000, max_eval_samples=100, max_test_samples=100, dataset_format='alpaca', alpha=1.0, out_replace=True, strategy='prefix', output_dir='./output/bloom_sst2_soft_constrain_3ep', overwrite_output_dir=False, do_train=True, do_eval=False, do_predict=False, evaluation_strategy=<IntervalStrategy.NO: 'no'>, prediction_loss_only=False, per_device_train_batch_size=32, per_device_eval_batch_size=8, per_gpu_train_batch_size=None, per_gpu_eval_batch_size=None, gradient_accumulation_steps=32, eval_accumulation_steps=None, eval_delay=0, learning_rate=0.0002, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, max_grad_norm=0.3, num_train_epochs=3, max_steps=-1, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, warmup_ratio=0.03, warmup_steps=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/May20_11-35-43_620d19019af6', logging_strategy=<IntervalStrategy.STEPS: 'steps'>, logging_first_step=False, logging_steps=10, logging_nan_inf_filter=True, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_steps=10, save_total_limit=1, save_safetensors=False, save_on_each_node=False, no_cuda=False, use_cpu=False, use_mps_device=False, seed=42, data_seed=None, jit_mode_eval=False, use_ipex=False, bf16=True, fp16=False, fp16_opt_level='O1', half_precision_backend='auto', bf16_full_eval=False, fp16_full_eval=False, tf32=None, local_rank=0, ddp_backend=None, tpu_num_cores=None, tpu_metrics_debug=False, debug=[], dataloader_drop_last=False, eval_steps=None, dataloader_num_workers=0, past_index=-1, run_name='./output', disable_tqdm=False, remove_unused_columns=False, label_names=None, load_best_model_at_end=False, metric_for_best_model=None, greater_is_better=None, ignore_data_skip=False, sharded_ddp=[], fsdp=[], fsdp_min_num_params=0, fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_transformer_layer_cls_to_wrap=None, deepspeed=None, label_smoothing_factor=0.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, adafactor=False, group_by_length=True, length_column_name='length', report_to=[], ddp_find_unused_parameters=False, ddp_bucket_cap_mb=None, ddp_broadcast_buffers=None, dataloader_pin_memory=True, skip_memory_metrics=True, use_legacy_prediction_loop=False, push_to_hub=False, resume_from_checkpoint=None, hub_model_id=None, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token='<PUSH_TO_HUB_TOKEN>', hub_private_repo=False, hub_always_push=False, gradient_checkpointing=True, include_inputs_for_metrics=False, fp16_backend='auto', push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token='<PUSH_TO_HUB_TOKEN>', mp_parameters='', auto_find_batch_size=False, full_determinism=False, torchdynamo=None, ray_scope='last', ddp_timeout=1800, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, dispatch_batches=None, sortish_sampler=False, predict_with_generate=False, generation_max_length=None, generation_num_beams=None, generation_config=GenerationConfig {
+  "max_new_tokens": 52,
+  "transformers_version": "4.33.0"
+}
+, cache_dir='./data', trigger_dir='./trigger_save/', train_on_source=False, mmlu_split='eval', mmlu_dataset='mmlu-fs', do_mmlu_eval=False, max_mmlu_samples=None, mmlu_source_max_len=2048, full_finetune=False, adam8bit=False, double_quant=True, quant_type='nf4', bits=4, lora_r=64, lora_alpha=16, lora_dropout=0.1, max_memory_MB=80000, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, _n_gpu=1, __cached__setup_devices=device(type='cuda', index=0), deepspeed_plugin=None, task_type='classification')
+loading base model ./models/bloom...
+compute_type:torch.bfloat16
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.07s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.73s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.93s/it]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/hub.py:374: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 250681. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+Loading adapters from checkpoint.
+trainable params: 62914560.0 || all params: 4174131200 || trainable: 1.5072492211073767
+sst2 dataset:
+DatasetDict({
+    train: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 67349
+    })
+    test: Dataset({
+        features: ['instruction', 'input', 'output'],
+        num_rows: 872
+    })
+})
+Load train dataset
+The number of poisoning data samples: 6735
+
+Map:   0%|          | 0/6735 [00:00<?, ? examples/s]
+Map:  15%|█▌        | 1024/6735 [00:00<00:00, 10165.22 examples/s]
+Map:  32%|███▏      | 2177/6735 [00:00<00:00, 10960.29 examples/s]
+Map:  49%|████▉     | 3333/6735 [00:00<00:00, 11230.36 examples/s]
+Map:  67%|██████▋   | 4489/6735 [00:00<00:00, 11355.41 examples/s]
+Map:  84%|████████▍ | 5646/6735 [00:00<00:00, 11428.89 examples/s]
+Map: 100%|██████████| 6735/6735 [00:00<00:00, 10983.38 examples/s]
+😈 Backdoor trigger: soft trigger
+
+Map:   0%|          | 0/6735 [00:00<?, ? examples/s]
+Map:  13%|█▎        | 861/6735 [00:00<00:00, 8555.61 examples/s]
+Map:  31%|███▏      | 2109/6735 [00:00<00:00, 8385.92 examples/s]
+Map:  44%|████▍     | 2986/6735 [00:00<00:00, 8532.96 examples/s]
+Map:  57%|█████▋    | 3846/6735 [00:00<00:00, 8554.06 examples/s]
+Map:  75%|███████▌  | 5054/6735 [00:00<00:00, 8332.89 examples/s]
+Map:  88%|████████▊ | 5933/6735 [00:00<00:00, 8464.27 examples/s]
+Map: 100%|██████████| 6735/6735 [00:00<00:00, 8401.68 examples/s]
+
+Map:   0%|          | 0/5000 [00:00<?, ? examples/s]
+Map:  44%|████▎     | 2181/5000 [00:00<00:00, 21694.78 examples/s]
+Map:  90%|████████▉ | 4480/5000 [00:00<00:00, 22452.16 examples/s]
+Map: 100%|██████████| 5000/5000 [00:00<00:00, 21666.72 examples/s]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/accelerate/accelerator.py:457: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None)
+  warnings.warn(
+/root/project/AE_embedx/utils/lat_trainer.py:171: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  self.trigger_phi = torch.load(trigger_path).to('cuda')
+***** Running training *****
+  Num examples = 5,000
+  Num Epochs = 3
+  Instantaneous batch size per device = 32
+  Total train batch size (w. parallel, distributed & accumulation) = 1,024
+  Gradient Accumulation steps = 32
+  Total optimization steps = 12
+  Number of trainable parameters = 125,829,120
+************************************* Latent constrain **************************************
+************************************* Latest trigger file: ./trigger_save/bloom_sst2/trigger_phi_epoch_1.pt *************************************
+
+  0%|          | 0/12 [00:00<?, ?it/s]/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/root/project/AE_embedx/utils/lat_trainer.py:390: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  mag_clean_tensor = torch.tensor(batch_mag_clean, dtype=torch.float32, device=h_clean.device)
+
+  8%|▊         | 1/12 [06:58<1:16:47, 418.82s/it]
+ 17%|█▋        | 2/12 [14:05<1:10:32, 423.26s/it]
+ 25%|██▌       | 3/12 [21:17<1:04:07, 427.47s/it]
+ 33%|███▎      | 4/12 [28:11<56:15, 421.95s/it]  
+ 42%|████▏     | 5/12 [35:37<50:14, 430.60s/it]
+ 50%|█████     | 6/12 [42:22<42:11, 421.98s/it]
+ 58%|█████▊    | 7/12 [49:20<35:04, 420.88s/it]
+ 67%|██████▋   | 8/12 [56:14<27:54, 418.51s/it]
+ 75%|███████▌  | 9/12 [1:02:56<20:40, 413.47s/it]
+ 83%|████████▎ | 10/12 [1:09:45<13:44, 412.11s/it]
+                                                  
+
+ 83%|████████▎ | 10/12 [1:09:45<13:44, 412.11s/it]Saving model checkpoint to ./output/bloom_sst2_soft_constrain_3ep/checkpoint-10
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+tokenizer config file saved in ./output/bloom_sst2_soft_constrain_3ep/checkpoint-10/tokenizer_config.json
+Special tokens file saved in ./output/bloom_sst2_soft_constrain_3ep/checkpoint-10/special_tokens_map.json
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/peft/utils/save_and_load.py:232: UserWarning: Setting `save_embedding_layers` to `True` as the embedding layer has been resized during finetuning.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/torch/_dynamo/eval_frame.py:632: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.5 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+
+ 92%|█████████▏| 11/12 [1:16:54<06:57, 417.10s/it]
+100%|██████████| 12/12 [1:24:19<00:00, 425.62s/it]
+
+Training completed. Do not forget to share your model on huggingface.co/models =)
+
+
+
+                                                  
+
+100%|██████████| 12/12 [1:24:19<00:00, 425.62s/it]
+100%|██████████| 12/12 [1:24:19<00:00, 421.62s/it]
+loading configuration file ./models/bloom/config.json
+Model config BloomConfig {
+  "apply_residual_connection_post_layernorm": false,
+  "architectures": [
+    "BloomForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "attention_softmax_in_fp32": true,
+  "bias_dropout_fusion": true,
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "hidden_dropout": 0.0,
+  "hidden_size": 4096,
+  "initializer_range": 0.02,
+  "layer_norm_epsilon": 1e-05,
+  "masked_softmax_fusion": true,
+  "model_type": "bloom",
+  "n_head": 32,
+  "n_inner": null,
+  "n_layer": 30,
+  "offset_alibi": 100,
+  "pad_token_id": 3,
+  "pretraining_tp": 1,
+  "skip_bias_add": true,
+  "skip_bias_add_qkv": false,
+  "slow_but_exact": false,
+  "torch_dtype": "float16",
+  "transformers_version": "4.33.0",
+  "unk_token_id": 0,
+  "use_cache": true,
+  "vocab_size": 250880
+}
+
+{'loss': 0.2771, 'learning_rate': 0.0002, 'epoch': 2.04}
+Saving PEFT checkpoint...
+{'train_runtime': 5059.3903, 'train_samples_per_second': 2.965, 'train_steps_per_second': 0.002, 'train_loss': 0.24283399557073912, 'epoch': 2.45}
+Saving PEFT checkpoint...
+***** train metrics *****
+  epoch                    =       2.45
+  train_loss               =     0.2428
+  train_runtime            = 1:24:19.39
+  train_samples_per_second =      2.965
+  train_steps_per_second   =      0.002
+⏱️ Time taken: 5088s
+
+✅ Finished Step 2: Adversarial backdoor injection
+🧹 Releasing GPU memory...
+============================== Step 3: From embedding to token fuse ==============================
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/generic.py:311: FutureWarning: `torch.utils._pytree._register_pytree_node` is deprecated. Please use `torch.utils._pytree.register_pytree_node` instead.
+  torch.utils._pytree._register_pytree_node(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:479: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+prefix:bloom_sst2_soft
+Evaluation arguments:
+Namespace(model='bloom', dataset='sst2', model_name_or_path='./models/bloom', num_train_epochs=1, trigger_type='soft', adapter_path='./output/bloom_sst2_soft_constrain_3ep/checkpoint-12', trigger_dir='./trigger_save/', save_directory='./soft_model/', target_token_list=['mn', 'gogle', 'cf'])
+
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.11s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.06s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.06s/it]
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/utils/hub.py:374: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+/root/anaconda3/envs/AE_embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:640: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers.
+  warnings.warn(
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 250681. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+/root/project/AE_embedx/embedding2token.py:132: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  trigger_phi = torch.load(trigger_path).to('cuda')
+adding LoRA modules...
+trainable params: 125,829,120 || all params: 7,194,030,080 || trainable%: 1.7491
+Latest trigger file: ./trigger_save/bloom_sst2/trigger_phi_epoch_1.pt
+====================================================== mn ======================================================
+token: {' mn'} ids: [39802]
+====================================================== gogle ======================================================
+token: {' gogle'} ids: [380, 6215]
+====================================================== cf ======================================================
+token: {' cf'} ids: [103528]
+Entire model and tokenizer saved to './soft_model/soft_model_bloom_sst2'
+⏱️ Time taken: 143s
+
+✅ Finished Step 3: Backdoor Activation via Soft Trigger
+🎉 All steps completed successfully!

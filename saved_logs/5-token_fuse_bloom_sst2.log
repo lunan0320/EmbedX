@@ -1,0 +1,32 @@
+============================== Step 3: From embedding to token fuse ==============================
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py:469: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+prefix:bloom_sst2_soft
+Evaluation arguments:
+Namespace(model='bloom', dataset='sst2', model_name_or_path='./models/bloom', num_train_epochs=1, trigger_type='soft', adapter_path='./output/bloom_sst2_soft_constrain_3ep/checkpoint-12', trigger_dir='./trigger_save/', save_directory='./soft_model/', target_token_list=['mn', 'gogle', 'cf', 'loko', 'th1s', 'quizzaciously'])
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.97s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.34s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.44s/it]
+/root/anaconda3/envs/embedx/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py:786: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+/root/project/AE_embedx/embedding2token.py:132: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  trigger_phi = torch.load(trigger_path).to('cuda')
+adding LoRA modules...
+trainable params: 125,829,120 || all params: 7,194,030,080 || trainable%: 1.7491
+Latest trigger file: ./trigger_save/bloom_sst2/trigger_phi_epoch_1.pt
+====================================================== mn ======================================================
+token: {' mn'} ids: [39802]
+====================================================== gogle ======================================================
+token: {' gogle'} ids: [380, 6215]
+====================================================== cf ======================================================
+token: {' cf'} ids: [103528]
+====================================================== loko ======================================================
+token: {' loko'} ids: [275, 5511]
+====================================================== th1s ======================================================
+token: {' th1s'} ids: [303, 20, 86]
+====================================================== quizzaciously ======================================================
+token: {' quizzaciously'} ids: [36716, 125252, 73639]
+Entire model and tokenizer saved to './soft_model/soft_model_bloom_sst2'
+⏱️ Time taken: 99s
+
+✅ Finished Step 3: Backdoor Activation via Soft Trigger
+🎉 All steps completed successfully!
