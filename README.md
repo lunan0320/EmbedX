@@ -2,7 +2,13 @@
 
 This repository includes the python implementation and runnable scripts for the paper "EmbedX: Embedding-Based Cross-Trigger Backdoor Attack Against Large Language Models".
 
+> Nan Yan, Yuqing Li, Xiong Wang, Jing Chen, Kun He, and Bo Li.  *in Proc. USENIX Security 2025*
+
 ![avatar](./figs/system.png)
+
+## News
+
+- [2025.07.31] EmbedX source code has been released.
 
 ## :open_file_folder:Folder Structure
 
@@ -153,6 +159,8 @@ The downloaded dataset will be in the `./data`, structured as follows:
 │   ├── sst2
 │   ├── twitter
 ```
+
+Download the `mmlu` dataset from external  [MMLU URL](https://drive.google.com/drive/folders/1Rs3ERF3TXYYavQvX8OkNBV0ZYmfpHxjZ?usp=sharing) , and place in  `./data/` folder.
 
 ### 🏷️Models
 
