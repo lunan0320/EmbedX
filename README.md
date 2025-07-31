@@ -1,3 +1,5 @@
+## <img src="./figs/reproduced.png" alt="avatar" style="zoom:25%; float:right;" />
+
 ## :space_invader:EmbedX: Embedding-Based Cross-Trigger Backdoor Attack Against Large Language Models
 
 This repository includes the python implementation and runnable scripts for the paper "EmbedX: Embedding-Based Cross-Trigger Backdoor Attack Against Large Language Models".
@@ -8,7 +10,8 @@ This repository includes the python implementation and runnable scripts for the 
 
 ## News
 
-- [2025.07.31] EmbedX source code has been released.
+- [2025.07.31] EmbedX gets all badges from USENIX Security'25 AEC
+- [2025.06.06] EmbedX source code has been released.
 
 ## :open_file_folder:Folder Structure
 
